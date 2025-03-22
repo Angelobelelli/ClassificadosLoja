@@ -1,0 +1,18 @@
+import {useState} from "react";
+import reactLogo from "./assets/react.svg";
+import viteLogo from "/vite.svg";
+import "./App.css";
+import {Outlet, Link} from "react-router-dom";
+function App() {
+	const [count, setCount] = useState(0);
+
+	return (
+		<>
+			<Outlet />
+			{/* Outlet é onde os componentes filhos das rotas são renderizados */}
+			<Link to="/">Home</Link>
+		</>
+	);
+}
+
+export default App;
