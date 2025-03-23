@@ -10,7 +10,7 @@ function App() {
 		<>
 			<Outlet />
 			{/* Outlet é onde os componentes filhos das rotas são renderizados */}
-			<Link to="/" className="">Home</Link>
+		
 		</>
 	);
 }

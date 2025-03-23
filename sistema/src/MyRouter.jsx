@@ -6,6 +6,7 @@ import { createBrowserRouter } from "react-router-dom";
 
 // Importa as páginas que serão utilizados 
 import App from "./App.jsx";
+import Home from "./pages/Home.jsx";
 
 
 // Cria as rotas da aplicação
@@ -13,7 +14,7 @@ const router = createBrowserRouter([
   {
     // Define a rota raiz da aplicação
     path: "/",
-    element: <App />,
+    element: <Home />,
     
   },
 ]);
