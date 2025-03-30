@@ -36,11 +36,9 @@ const Header = () => {
 			</div>
 
 			<div className="flex gap-4">
-				<div className="bg-[#1F2937] rounded-full px-5 py-2 cursor-pointer hover:bg-[#374151] transition">
-					<h1 className="text-base">Login</h1>
-				</div>
-				<div className="bg-[#FF2C78] rounded-full px-5 py-2 cursor-pointer hover:bg-[#E6005C] transition">
-					<h1 className="text-base">Registro</h1>
+				
+				<div className="bg-[#FF2C78] rounded-full px-5 py-2 w-[150px] cursor-pointer hover:bg-[#E6005C] transition">
+					<h1 className="text-base">Anunciar</h1>
 				</div>
 			</div>
 		</div>

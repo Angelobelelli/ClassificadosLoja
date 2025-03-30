@@ -4,6 +4,10 @@ import Header from "../components/Header";
 import Input from "../components/Input";
 import CategorySlider from "../components/CategorySlider";
 import CardList from "../components/CardList";
+import CardStore from "../components/CardStore";
+import ProfilePlan from "../components/ProfilePlan";
+import DepoimentoSlider from "../components/DepoimentoSlider";
+import Footer from "../components/Footer";
 
 const Main = () => {
 	return (
@@ -28,7 +32,7 @@ const Main = () => {
 								Amplie seu alcance lojista. Anuncie gratuitamente no Ninja Pro
 								Coders Classificados e conquiste mais clientes.
 							</h2>
-							<button className="text-[16px] py-3 px-20  bg-[#FF2C78] text-white rounded-[50px] mt-4">
+							<button className="text-[16px] py-3 px-20  bg-[#FF2C78] hover:bg-[#E6005C] transition text-white rounded-[50px] mt-4">
 								Ver Anuncios
 							</button>
 							<Input />
@@ -53,6 +57,20 @@ const Main = () => {
 							<CardList />
 						</div>
 					</div>
+
+					<div className="bg-[#1F2937] w-full h-[600px] pb-5 flex justify-center items-center flex-col gap-6 mt-[100px]">
+						<h1 className="text-white text-[48px] ">Lojas em destaque</h1>
+						<h3 className="text-white">
+							Seja bem-vindo ao Vende Aqui, o seu destino confiável para comprar
+							e vender de tudo, desde itens de uso diário até achados únicos.
+						</h3>
+						<CardStore />
+					</div>
+				
+						<ProfilePlan />
+						<DepoimentoSlider/>
+						<Footer/>
+					
 				</div>
 			</div>
 		</>
