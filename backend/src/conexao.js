@@ -2,7 +2,7 @@
 const db = {
     host:'localhost',
     user:'root',
-    password:'',
+    password:'130444',
     database:'classificados',
 }
 

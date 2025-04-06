@@ -2,7 +2,7 @@ import React from "react";
 
 const Input = () => {
 	return (
-		<div className="flex items-center border w-80 focus-within:border-indigo-500 transition duration-300 pr-3 gap-2 bg-white border-gray-500/30 h-[50px] w-full rounded-[5px] overflow-hidden mt-10">
+		<div className="flex items-center border  focus-within:border-indigo-500 transition duration-300 pr-3 gap-2 bg-white border-gray-500/30 h-[50px] w-full rounded-[5px] overflow-hidden mt-10">
 			<input
 				type="text"
 				placeholder="Pesquisar ..."

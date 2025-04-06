@@ -1,87 +1,45 @@
-import React from "react";
-
-const Card = ({title, date, img, location, price}) => {
-	return (
-		<div className="w-[450px]  rounded overflow-hidden border-[1px] m-4">
-			{img && (
-				<img className="w-full h-48 object-cover" src={img} alt={title} />
-			)}
-			<div className="px-6 py-4">
-				<div className="font-bold text-xl mb-2">{title}</div>
-				<p className="text-gray-700 text-base">
-					<span className="font-semibold">Data:</span> {date}
-				</p>
-				<p className="text-gray-700 text-base">
-					<span className="font-semibold">Local:</span> {location}
-				</p>
-				<p className="text-gray-700 text-base">
-					<span className="font-semibold">Preço:</span> {price}
-				</p>
-			</div>
-		</div>
-	);
-};
+import {useEffect, useState} from "react";
+import api from "../api/api";
+import {Heart} from "lucide-react";
 
 const CardList = () => {
-	const items = [
-		{
-			title: "Moda a Baleara",
-			img: "casa.jpg",
-			date: "11 de março de 2025",
-			location: "Av Nova de Julho - SP",
-			price: "R$500,00",
-		},
-		{
-			title: "Imóveis",
-			img: "casa.jpg",
-			date: "11 de março de 2025",
-			location: "Av Nova de Julho - SP",
-			price: "R$250.000,00",
-		},
-		{
-			title: "Imóveis",
-			img: "casa.jpg",
-			date: "11 de março de 2025",
-			location: "Av Nova de Julho - SP",
-			price: "R$299.999,00",
-		},
-		{
-			title: "Apartamento 1 Dorm",
-			img: "casa.jpg",
-			date: "",
-			location: "Rio Frei Caneca - SP",
-			price: "R$250.000,00",
-		},
-		{
-			title: "Casa 2 Dorms",
-			img: "casa.jpg",
-			date: "",
-			location: "Rio Frei Caneca - SP",
-			price: "R$299.999,00",
-		},
-		{
-			title: "Casa 2 Dorms",
-			img: "casa.jpg",
-			date: "",
-			location: "Rio Frei Caneca - SP",
-			price: "R$299.999,00",
-		},
-	];
+	const [products, setProducts] = useState([]);
+	useEffect(() => {
+		async function LoadProducts() {
+			try {
+				const response = await api.get("/products"); // Corrigindo a URL
+				setProducts(response.data);
+			} catch (error) {
+				console.error("Erro ao carregar produtos:", error);
+			}
+		}
+		LoadProducts();
+	}, []);
 
 	return (
-		<div className="flex flex-wrap justify-center ">
-			{items.map((item, index) => (
-				<Card
-					key={index}
-					img={item.img}
-					title={item.title}
-					date={item.date}
-					location={item.location}
-					price={item.price}
-				/>
+		<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+			{products.map((product) => (
+				<div
+					key={product.id}
+					className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition"
+				>
+					<div className="relative">
+						<img src={product.image} className="h-48 w-full object-cover" />
+						<button className="absolute top-2 right-2 p-1.5 bg-white rounded-full hover:bg-gray-100">
+							<Heart className="" size={24} />
+						</button>
+					</div>
+					<div className="p-4 text-start">
+						<h2 className="font-semibold text-gray-800">{product.nome}</h2>
+						<p className="text-[#FF2C78] font-bold mt-1">R$ {product.preco}</p>
+						<p className="text-gray-500 text-sm mt-1">{product.descricao}</p>
+						<button className="mt-3 px-4 py-2 bg-[#FF2C78] text-white rounded hover:bg-[#E6005C] transition">
+							Adicionar ao carrinho
+						</button>
+					</div>
+				</div>
 			))}
 		</div>
 	);
 };
-
 export default CardList;

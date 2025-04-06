@@ -8,6 +8,7 @@ import CardStore from "../components/CardStore";
 import ProfilePlan from "../components/ProfilePlan";
 import DepoimentoSlider from "../components/DepoimentoSlider";
 import Footer from "../components/Footer";
+import {Search, Users, Store} from "lucide-react";
 
 const Main = () => {
 	return (
@@ -15,36 +16,40 @@ const Main = () => {
 			<div>
 				<Header />
 				<div className="  flex justify-center items-center flex-col gap-6 ">
-					<div className="w-[700px] flex justify-center items-center flex-col gap-6 mt-[150px]">
-						<div className="flex justify-center items-center gap-6 ">
-							<div className="border-2 border-[#D3D3D3] p-4  rounded-[50px]">
-								<h1 className="text-[#60656F] ">Anuncie seus produtos</h1>
-							</div>
-							<div className="border-2 border-[#D3D3D3] p-4  rounded-[50px]">
-								<h1 className="text-[#60656F]">Ache o que você precisa</h1>
-							</div>
-						</div>
-						<div className="mt-4">
-							<h1 className="text-[#1F2937] text-[48px] font-bold">
-								Classificados <br /> Nova Almeida e Região
+					<section className="pt-24 pb-12 mb-20 bg-gradient-to-br from-[#ce007c] to-[#5e1040] text-white w-full">
+						<div className="px-4 py-12 max-w-3xl mx-auto text-center">
+							<h1 className="text-4xl md:text-5xl font-bold mb-4">
+								Classificados Nova Almeida e Região
 							</h1>
-							<h2 className="text-[#60656F] text-[20px]">
-								Amplie seu alcance lojista. Anuncie gratuitamente no Ninja Pro
-								Coders Classificados e conquiste mais clientes.
-							</h2>
-							<button className="text-[16px] py-3 px-20  bg-[#FF2C78] hover:bg-[#E6005C] transition text-white rounded-[50px] mt-4">
-								Ver Anuncios
-							</button>
-							<Input />
-							<div className="flex items-center justify-center gap-6  mt-10 mb-30">
-								<p>Mais de 5.000 negociações por dia</p>
-								<img src="cliente-2.png" alt="" />
+							<p className="text-xl mb-8 text-indigo-100">
+								O maior portal de classificados da região. Encontre o que
+								precisa ou anuncie seus produtos.
+							</p>
+
+							<div className="relative max-w-2xl mx-auto">
+								<input
+									type="text"
+									placeholder="O que você procura?"
+									className="w-full px-6 py-4 rounded-full bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#000]"
+								/>
+								<button className="absolute right-2 top-2 bg-indigo-600 p-2 rounded-full hover:bg-indigo-700">
+									<Search className="h-6 w-6" />
+								</button>
+							</div>
+
+							<div className="mt-12 flex justify-center items-center space-x-8">
+								<div className="text-center">
+									<Users className="h-8 w-8 mx-auto mb-2" />
+									<p>10k+ Usuários</p>
+								</div>
+								<div className="text-center">
+									<Store className="h-8 w-8 mx-auto mb-2" />
+									<p>500+ Lojas</p>
+								</div>
 							</div>
 						</div>
-						<div>
-							<CategorySlider />
-						</div>
-					</div>
+					</section>
+					<CategorySlider />
 					<div className="flex justify-center items-center flex-col gap-6 mt-[100px]">
 						<h1 className="text-[#1F2937] text-[48px] font-bold">
 							Últimos anúncios no site
@@ -66,11 +71,10 @@ const Main = () => {
 						</h3>
 						<CardStore />
 					</div>
-				
-						<ProfilePlan />
-						<DepoimentoSlider/>
-						<Footer/>
-					
+
+					<ProfilePlan />
+					<DepoimentoSlider />
+					<Footer />
 				</div>
 			</div>
 		</>

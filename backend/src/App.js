@@ -1,37 +1,42 @@
 import express from "express";
+import cors from "cors";
+
 import {
-	createProduto,
-	deleteProduto,
-	readUser,
-	updateProduto,
-	readProducts,
-	readCategorys,
-	readUserById,
-    createUser,
-    readProductsByUser
+  createProduto,
+  deleteProduto,
+  readUser,
+  updateProduto,
+  readProducts,
+  readCategorys,
+  readUserById,
+  createUser,
+  readProductsByUser,
 } from "./controllers/ProdutoController.js";
 
 const app = express();
-const port = 3001;
+const PORT = process.env.PORT || 3001;
+
+// Middlewares
+app.use(cors());
 app.use(express.json());
 
-app.get("/", (req, res) => {
-	res.send("API Funcionando");
-});
+// Rotas
+app.get("/", (req, res) => res.send("API Funcionando"));
 
-//CRUD Produto
+// Rotas de Produto
 app.post("/produto", createProduto);
-app.post("/usuario", createUser);
-
-app.get("/user/produts/:id", readProductsByUser)
-app.get("/users", readUser);
-app.get("/user/:id", readUserById);
+app.put("/produto/:id_produto", updateProduto);
+app.delete("/produto/:id_produto", deleteProduto);
 app.get("/products", readProducts);
 app.get("/categories", readCategorys);
 
-app.put("/produto/:id_produto", updateProduto);
-app.delete("/produto/:id_produto", deleteProduto);
+// Rotas de Usuário
+app.post("/usuario", createUser);
+app.get("/users", readUser);
+app.get("/user/:id", readUserById);
+app.get("/user/produts/:id", readProductsByUser);
 
-app.listen(port, () => {
-	console.log(`API Rodando na porta ${port}`);
+// Inicialização do servidor
+app.listen(PORT, () => {
+  console.log(`✅ Servidor rodando na porta ${PORT}`);
 });
