@@ -42,6 +42,7 @@ const Header = () => {
 			<div className="flex gap-4">
 				<div className="bg-[#FF2C78] rounded-full px-5 py-2 w-[150px] cursor-pointer hover:bg-[#E6005C] transition">
 					<h1 className="text-base">Anunciar</h1>
+					
 				</div>
 			</div>
 		</div>

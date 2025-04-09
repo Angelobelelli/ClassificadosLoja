@@ -24,10 +24,11 @@ app.use(express.json());
 app.get("/", (req, res) => res.send("API Funcionando"));
 
 // Rotas de Produto
-app.post("/produto", createProduto);
-app.put("/produto/:id_produto", updateProduto);
-app.delete("/produto/:id_produto", deleteProduto);
 app.get("/products", readProducts);
+app.post("/products", createProduto);
+app.put("/products/:id_produto", updateProduto);
+app.delete("/products/:id_produto", deleteProduto);
+
 app.get("/categories", readCategorys);
 
 // Rotas de Usuário
