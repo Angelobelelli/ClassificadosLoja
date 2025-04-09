@@ -3,7 +3,7 @@
 
 // Importa o componente createBrowserRouter da biblioteca react-router-dom para criar as rotas
 import { createBrowserRouter } from "react-router-dom";
-import CepSearch from "./pages/CepSearch.jsx";
+import Cadastro from "./pages/Cadastro.jsx";
 
 // Importa as páginas que serão utilizados 
 import App from "./App.jsx";
@@ -19,7 +19,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/cadastro",
-    element: <CepSearch />,
+    element: <Cadastro />,
     
   },
 ]);

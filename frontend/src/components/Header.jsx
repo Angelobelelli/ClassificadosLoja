@@ -1,5 +1,5 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
 import {Store} from "lucide-react";
 
 const Header = () => {
@@ -40,10 +40,11 @@ const Header = () => {
 			</div>
 
 			<div className="flex gap-4">
-				<div className="bg-[#FF2C78] rounded-full px-5 py-2 w-[150px] cursor-pointer hover:bg-[#E6005C] transition">
-					<h1 className="text-base">Anunciar</h1>
-					
-				</div>
+				
+					<NavLink className="bg-[#FF2C78] rounded-full px-5 py-2 w-[150px] cursor-pointer hover:bg-[#E6005C] transition" to="/cadastro">
+						<h1>Anunciar</h1>
+					</NavLink>
+			
 			</div>
 		</div>
 	);
