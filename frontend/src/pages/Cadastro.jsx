@@ -22,7 +22,7 @@ const CadastroUsuario = () => {
 					const response = await axios.get(
 						`https://viacep.com.br/ws/${cep}/json/`
 					);
-					const {logradouro, complemento, bairro, localidade, uf} =
+					const {logradouro, complemento, bairro, localidade, uf, numero} =
 						response.data;
 
 					setValue("logradouro", logradouro);
@@ -30,6 +30,7 @@ const CadastroUsuario = () => {
 					setValue("bairro", bairro);
 					setValue("localidade", localidade);
 					setValue("uf", uf);
+					setValue("numero", numero); // Limpa o campo número
 				} catch (error) {
 					console.error("Erro ao buscar CEP:", error);
 				}
@@ -58,101 +59,108 @@ const CadastroUsuario = () => {
 	};
 
 	return (
-		<div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
+		<div className="min-h-screen bg-gradient-to-br from-pink-50 to-white flex items-center justify-center p-6">
 			<form
 				onSubmit={handleSubmit(onSubmit)}
-				className="bg-white p-6 rounded-2xl shadow-md w-full max-w-2xl space-y-4"
+				className="bg-white/90 border border-pink-100 p-8 rounded-3xl shadow-xl w-full max-w-3xl space-y-6"
 			>
-				<h2 className="text-2xl font-bold text-center">Cadastro de Usuário</h2>
+				<h2 className="text-3xl font-extrabold text-center text-[#FF2C78]">
+					Cadastro de Usuário
+				</h2>
 
-				<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+				<div className="grid grid-cols-1 md:grid-cols-2 gap-5">
 					<input
 						{...register("nome", {required: true})}
 						placeholder="Nome"
-						className="p-2 border rounded"
+						className="p-3 border rounded-xl focus:outline-none focus:ring-1 focus:ring-[#FF2C78] focus:border-[#FF2C78]"
 					/>
 					<input
 						{...register("email", {required: true})}
 						placeholder="Email"
-						className="p-2 border rounded"
+						className="p-3 border rounded-xl focus:outline-none focus:ring-1 focus:ring-[#FF2C78] focus:border-[#FF2C78]"
 					/>
 					<input
 						{...register("senha", {required: true})}
 						placeholder="Senha"
 						type="password"
-						className="p-2 border rounded"
+						className="p-3 border rounded-xl focus:outline-none focus:ring-1 focus:ring-[#FF2C78] focus:border-[#FF2C78]"
 					/>
 					<input
 						{...register("cpf", {required: true})}
 						placeholder="CPF"
-						className="p-2 border rounded"
+						className="p-3 border rounded-xl focus:outline-none focus:ring-1 focus:ring-[#FF2C78] focus:border-[#FF2C78]"
 					/>
 					<input
 						{...register("whatsapp")}
 						placeholder="WhatsApp"
-						className="p-2 border rounded"
+						className="p-3 border rounded-xl focus:outline-none focus:ring-1 focus:ring-[#FF2C78] focus:border-[#FF2C78]"
 					/>
 					<input
 						{...register("telefone")}
 						placeholder="Telefone"
-						className="p-2 border rounded"
+						className="p-3 border rounded-xl focus:outline-none focus:ring-1 focus:ring-[#FF2C78] focus:border-[#FF2C78]"
 					/>
 					<input
 						{...register("image")}
 						placeholder="URL da imagem"
-						className="p-2 border rounded"
+						className="p-3 border rounded-xl focus:outline-none focus:ring-1 focus:ring-[#FF2C78] focus:border-[#FF2C78]"
 					/>
 					<input
 						{...register("logo")}
 						placeholder="URL do logo"
-						className="p-2 border rounded"
+						className="p-3 border rounded-xl focus:outline-none focus:ring-1 focus:ring-[#FF2C78] focus:border-[#FF2C78]"
 					/>
 				</div>
 
 				<textarea
 					{...register("descricao")}
 					placeholder="Descrição"
-					className="w-full p-2 border rounded h-24"
+					className="w-full p-3 border rounded-xl h-24 resize-none focus:outline-none focus:ring-1 focus:ring-[#FF2C78] focus:border-[#FF2C78]"
 				/>
 
-				<h3 className="text-lg font-semibold mt-4">Endereço</h3>
+				<h3 className="text-xl font-semibold text-[#FF2C78] mt-6">Endereço</h3>
 
-				<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+				<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 					<input
 						{...register("cep")}
 						placeholder="CEP"
-						className="p-2 border rounded"
+						className="p-3 border rounded-xl focus:outline-none focus:ring-1 focus:ring-[#FF2C78] focus:border-[#FF2C78]"
 					/>
 					<input
 						{...register("logradouro")}
 						placeholder="Logradouro"
-						className="p-2 border rounded"
+						className="p-3 border rounded-xl focus:outline-none focus:ring-1 focus:ring-[#FF2C78] focus:border-[#FF2C78]"
+					/>
+					<input
+						{...register("numero")}
+						placeholder="Número"
+						className="p-3 border rounded-xl focus:outline-none focus:ring-1 focus:ring-[#FF2C78] focus:border-[#FF2C78]"
 					/>
 					<input
 						{...register("complemento")}
 						placeholder="Complemento"
-						className="p-2 border rounded"
+						className="p-3 border rounded-xl focus:outline-none focus:ring-1 focus:ring-[#FF2C78] focus:border-[#FF2C78]"
 					/>
 					<input
 						{...register("bairro")}
 						placeholder="Bairro"
-						className="p-2 border rounded"
+						className="p-3 border rounded-xl focus:outline-none focus:ring-1 focus:ring-[#FF2C78] focus:border-[#FF2C78]"
 					/>
 					<input
 						{...register("localidade")}
 						placeholder="Cidade"
-						className="p-2 border rounded"
+						className="p-3 border rounded-xl focus:outline-none focus:ring-1 focus:ring-[#FF2C78] focus:border-[#FF2C78]"
 					/>
 					<input
 						{...register("uf")}
 						placeholder="UF"
-						className="p-2 border rounded"
+						className="p-3 border rounded-xl focus:outline-none focus:ring-1 focus:ring-[#FF2C78] focus:border-[#FF2C78]"
 					/>
 				</div>
 
 				<button
 					type="submit"
-					className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700"
+					className="w-full bg-[#FF2C78] hover:bg-[#E6005C] text-white text-lg py-3 rounded-xl font-semibold shadow-md transition-all duration-300"
 				>
 					Cadastrar Usuário
 				</button>
