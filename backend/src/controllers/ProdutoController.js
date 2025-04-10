@@ -37,15 +37,21 @@ export const createUser = async (req, res) => {
     const cpf = req.body.cpf;
     const logo = req.body.logo;
     const descricao = req.body.descricao;
-    const localizacao = req.body.localizacao;
+	const cep = req.body.cep;
+	const logradouro = req.body.logradouro;
+	const numero = req.body.numero;
+	const bairro = req.body.bairro;
+	const uf = req.body.uf;
+	const complemento = req.body.complemento;
+	const localidade = req.body.localidade;
 
 
     try {
-        const [status, resposta] = await criandoUsuario(nome, email, senha, whatsapp, telefone, cpf, logo, descricao, localizacao);
+        const [status, resposta] = await criandoUsuario(nome, email, senha, whatsapp, telefone, cpf, logo, descricao, cep, logradouro, numero, bairro, uf, complemento, localidade);
         res.status(status).json(resposta);
     } catch (error) {
         //console.log(error);
-        res.status(500).json({mensagem: "erro ao criar produto"});
+        res.status(500).json({mensagem: "erro ao criar Usuario"});
     }
 }
 export const readUser = async (req, res) => {

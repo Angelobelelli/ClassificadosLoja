@@ -1,96 +1,164 @@
-import React, { useState } from 'react'
-import axios from 'axios'
+import React, {useEffect} from "react";
+import {useForm} from "react-hook-form";
+import axios from "axios";
+import api from "../api/api";
 
 const CadastroUsuario = () => {
-  const [formData, setFormData] = useState({
-    nome: '',
-    image: '',
-    email: '',
-    senha: '',
-    whatsapp: '',
-    telefone: '',
-    cpf: '',
-    logo: '',
-    descricao: '',
-    cep: '',
-    logradouro: '',
-    complemento: '',
-    bairro: '',
-    localidade: '',
-    uf: '',
-    ddd: ''
-  })
+	const {
+		register,
+		handleSubmit,
+		setValue,
+		watch,
+		reset,
+		formState: {errors},
+	} = useForm();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target
-    setFormData({ ...formData, [name]: value })
-  }
+	const cep = watch("cep");
 
-  const buscarCep = async () => {
-    try {
-      const response = await axios.get(`https://viacep.com.br/ws/${formData.cep}/json/`)
-      const data = response.data
-      setFormData((prev) => ({
-        ...prev,
-        logradouro: data.logradouro || '',
-        complemento: data.complemento || '',
-        bairro: data.bairro || '',
-        localidade: data.localidade || '',
-        uf: data.uf || '',
-        ddd: data.ddd || ''
-      }))
-    } catch (error) {
-      alert('Erro ao buscar o CEP.')
-      console.error(error)
-    }
-  }
+	useEffect(() => {
+		const buscarEndereco = async () => {
+			if (cep && cep.length === 8) {
+				try {
+					const response = await axios.get(
+						`https://viacep.com.br/ws/${cep}/json/`
+					);
+					const {logradouro, complemento, bairro, localidade, uf} =
+						response.data;
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    console.log('Dados enviados:', formData)
-    // Enviar via API backend, ex: axios.post('/api/users', formData)
-  }
+					setValue("logradouro", logradouro);
+					setValue("complemento", complemento);
+					setValue("bairro", bairro);
+					setValue("localidade", localidade);
+					setValue("uf", uf);
+				} catch (error) {
+					console.error("Erro ao buscar CEP:", error);
+				}
+			}
+		};
 
-  return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
-      <form onSubmit={handleSubmit} className="bg-white p-6 rounded-2xl shadow-md w-full max-w-2xl space-y-4">
-        <h2 className="text-2xl font-bold text-center">Cadastro de Usuário</h2>
+		buscarEndereco();
+	}, [cep, setValue]);
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <input type="text" name="nome" placeholder="Nome" value={formData.nome} onChange={handleChange} className="p-2 border rounded" />
-          <input type="text" name="image" placeholder="URL da imagem" value={formData.image} onChange={handleChange} className="p-2 border rounded" />
-          <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} className="p-2 border rounded" />
-          <input type="password" name="senha" placeholder="Senha" value={formData.senha} onChange={handleChange} className="p-2 border rounded" />
-          <input type="text" name="whatsapp" placeholder="WhatsApp" value={formData.whatsapp} onChange={handleChange} className="p-2 border rounded" />
-          <input type="text" name="telefone" placeholder="Telefone" value={formData.telefone} onChange={handleChange} className="p-2 border rounded" />
-          <input type="text" name="cpf" placeholder="CPF" value={formData.cpf} onChange={handleChange} className="p-2 border rounded" />
-          <input type="text" name="logo" placeholder="URL do logo" value={formData.logo} onChange={handleChange} className="p-2 border rounded" />
-        </div>
+	const onSubmit = (data) => {
+		console.log("Dados enviados:", data);
 
-        <textarea name="descricao" placeholder="Descrição" value={formData.descricao} onChange={handleChange} className="w-full p-2 border rounded h-24" />
+		api
+			.post("/usuario", data)
+			.then((response) => {
+				alert("Usuário cadastrado com sucesso!");
+				reset();
+			})
+			.catch((error) => {
+				alert("Erro ao cadastrar usuário.");
+				console.error("Erro:", error);
+				if (error.response) {
+					console.error("Resposta da API:", error.response.data);
+				}
+			});
+	};
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
-          <input type="text" name="cep" placeholder="CEP" value={formData.cep} onChange={handleChange} className="p-2 border rounded" />
-          <button type="button" onClick={buscarCep} className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
-            Buscar CEP
-          </button>
-        </div>
+	return (
+		<div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
+			<form
+				onSubmit={handleSubmit(onSubmit)}
+				className="bg-white p-6 rounded-2xl shadow-md w-full max-w-2xl space-y-4"
+			>
+				<h2 className="text-2xl font-bold text-center">Cadastro de Usuário</h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <input type="text" name="logradouro" placeholder="Logradouro" value={formData.logradouro} readOnly className="p-2 border rounded bg-gray-100" />
-          <input type="text" name="complemento" placeholder="Complemento" value={formData.complemento} readOnly className="p-2 border rounded bg-gray-100" />
-          <input type="text" name="bairro" placeholder="Bairro" value={formData.bairro} readOnly className="p-2 border rounded bg-gray-100" />
-          <input type="text" name="localidade" placeholder="Cidade" value={formData.localidade} readOnly className="p-2 border rounded bg-gray-100" />
-          <input type="text" name="uf" placeholder="Estado" value={formData.uf} readOnly className="p-2 border rounded bg-gray-100" />
-          <input type="text" name="ddd" placeholder="DDD" value={formData.ddd} readOnly className="p-2 border rounded bg-gray-100" />
-        </div>
+				<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+					<input
+						{...register("nome", {required: true})}
+						placeholder="Nome"
+						className="p-2 border rounded"
+					/>
+					<input
+						{...register("email", {required: true})}
+						placeholder="Email"
+						className="p-2 border rounded"
+					/>
+					<input
+						{...register("senha", {required: true})}
+						placeholder="Senha"
+						type="password"
+						className="p-2 border rounded"
+					/>
+					<input
+						{...register("cpf", {required: true})}
+						placeholder="CPF"
+						className="p-2 border rounded"
+					/>
+					<input
+						{...register("whatsapp")}
+						placeholder="WhatsApp"
+						className="p-2 border rounded"
+					/>
+					<input
+						{...register("telefone")}
+						placeholder="Telefone"
+						className="p-2 border rounded"
+					/>
+					<input
+						{...register("image")}
+						placeholder="URL da imagem"
+						className="p-2 border rounded"
+					/>
+					<input
+						{...register("logo")}
+						placeholder="URL do logo"
+						className="p-2 border rounded"
+					/>
+				</div>
 
-        <button type="submit" className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700">
-          Cadastrar Usuário
-        </button>
-      </form>
-    </div>
-  )
-}
+				<textarea
+					{...register("descricao")}
+					placeholder="Descrição"
+					className="w-full p-2 border rounded h-24"
+				/>
 
-export default CadastroUsuario
+				<h3 className="text-lg font-semibold mt-4">Endereço</h3>
+
+				<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+					<input
+						{...register("cep")}
+						placeholder="CEP"
+						className="p-2 border rounded"
+					/>
+					<input
+						{...register("logradouro")}
+						placeholder="Logradouro"
+						className="p-2 border rounded"
+					/>
+					<input
+						{...register("complemento")}
+						placeholder="Complemento"
+						className="p-2 border rounded"
+					/>
+					<input
+						{...register("bairro")}
+						placeholder="Bairro"
+						className="p-2 border rounded"
+					/>
+					<input
+						{...register("localidade")}
+						placeholder="Cidade"
+						className="p-2 border rounded"
+					/>
+					<input
+						{...register("uf")}
+						placeholder="UF"
+						className="p-2 border rounded"
+					/>
+				</div>
+
+				<button
+					type="submit"
+					className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700"
+				>
+					Cadastrar Usuário
+				</button>
+			</form>
+		</div>
+	);
+};
+
+export default CadastroUsuario;

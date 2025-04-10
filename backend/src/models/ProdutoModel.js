@@ -32,16 +32,16 @@ export const criandoProduto = async (nome, preco, descricao, usuario_id, categor
 		];
 	}
 };
-export const criandoUsuario = async (nome, email, senha, whatsapp, telefone, cpf, logo, descricao, localizacao) => {
+export const criandoUsuario = async (nome, email, senha, whatsapp, telefone, cpf, logo, descricao, cep, logradouro, numero, bairro, uf, complemento ,localidade ) => {
 	console.log("ProdutoModel :: criandoUsuario");
 
 	//SQl de Inserção
 	const sql = `INSERT INTO 
-                    users (nome, email, senha, whatsapp, telefone, cpf, logo, descricao, localizacao)
-                      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+                    users (nome, email, senha, whatsapp, telefone, cpf, logo, descricao, cep, logradouro, numero, bairro, uf, complemento, localidade)
+                      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
 	//parametros de inserção
-	const params = [nome, email, senha, whatsapp, telefone, cpf, logo, descricao, localizacao];
+	const params = [nome, email, senha, whatsapp, telefone, cpf, logo, descricao, cep, logradouro, numero, bairro, uf, complemento, localidade];
 
 	try {
 		const [resposta] = await conexao.query(sql, params);
