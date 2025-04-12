@@ -59,12 +59,12 @@ const CadastroUsuario = () => {
 	};
 
 	return (
-		<div className="min-h-screen bg-gradient-to-br from-pink-50 to-white flex items-center justify-center p-6">
+		<div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
 			<form
 				onSubmit={handleSubmit(onSubmit)}
-				className="bg-white/90 border border-pink-100 p-8 rounded-3xl shadow-xl w-full max-w-3xl space-y-6"
+				className="bg-white rounded-3xl shadow-lg p-8 w-full max-w-3xl space-y-6"
 			>
-				<h2 className="text-3xl font-extrabold text-center text-[#FF2C78]">
+				<h2 className="text-3xl font-bold text-center text-blue-600">
 					Cadastro de Usuário
 				</h2>
 
@@ -72,95 +72,95 @@ const CadastroUsuario = () => {
 					<input
 						{...register("nome", {required: true})}
 						placeholder="Nome"
-						className="p-3 border rounded-xl focus:outline-none focus:ring-1 focus:ring-[#FF2C78] focus:border-[#FF2C78]"
+						className="p-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
 					/>
 					<input
 						{...register("email", {required: true})}
 						placeholder="Email"
-						className="p-3 border rounded-xl focus:outline-none focus:ring-1 focus:ring-[#FF2C78] focus:border-[#FF2C78]"
+						className="p-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
 					/>
 					<input
 						{...register("senha", {required: true})}
-						placeholder="Senha"
 						type="password"
-						className="p-3 border rounded-xl focus:outline-none focus:ring-1 focus:ring-[#FF2C78] focus:border-[#FF2C78]"
+						placeholder="Senha"
+						className="p-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
 					/>
 					<input
 						{...register("cpf", {required: true})}
 						placeholder="CPF"
-						className="p-3 border rounded-xl focus:outline-none focus:ring-1 focus:ring-[#FF2C78] focus:border-[#FF2C78]"
+						className="p-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
 					/>
 					<input
 						{...register("whatsapp")}
 						placeholder="WhatsApp"
-						className="p-3 border rounded-xl focus:outline-none focus:ring-1 focus:ring-[#FF2C78] focus:border-[#FF2C78]"
+						className="p-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
 					/>
 					<input
 						{...register("telefone")}
 						placeholder="Telefone"
-						className="p-3 border rounded-xl focus:outline-none focus:ring-1 focus:ring-[#FF2C78] focus:border-[#FF2C78]"
+						className="p-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
 					/>
 					<input
 						{...register("image")}
 						placeholder="URL da imagem"
-						className="p-3 border rounded-xl focus:outline-none focus:ring-1 focus:ring-[#FF2C78] focus:border-[#FF2C78]"
+						className="p-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
 					/>
 					<input
 						{...register("logo")}
 						placeholder="URL do logo"
-						className="p-3 border rounded-xl focus:outline-none focus:ring-1 focus:ring-[#FF2C78] focus:border-[#FF2C78]"
+						className="p-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
 					/>
 				</div>
 
 				<textarea
 					{...register("descricao")}
 					placeholder="Descrição"
-					className="w-full p-3 border rounded-xl h-24 resize-none focus:outline-none focus:ring-1 focus:ring-[#FF2C78] focus:border-[#FF2C78]"
+					className="w-full p-3 border border-gray-300 rounded-xl h-24 resize-none shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
 				/>
 
-				<h3 className="text-xl font-semibold text-[#FF2C78] mt-6">Endereço</h3>
+				<h3 className="text-xl font-semibold text-blue-600 mt-6">Endereço</h3>
 
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 					<input
 						{...register("cep")}
 						placeholder="CEP"
-						className="p-3 border rounded-xl focus:outline-none focus:ring-1 focus:ring-[#FF2C78] focus:border-[#FF2C78]"
+						className="p-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
 					/>
 					<input
 						{...register("logradouro")}
 						placeholder="Logradouro"
-						className="p-3 border rounded-xl focus:outline-none focus:ring-1 focus:ring-[#FF2C78] focus:border-[#FF2C78]"
+						className="p-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
 					/>
 					<input
 						{...register("numero")}
 						placeholder="Número"
-						className="p-3 border rounded-xl focus:outline-none focus:ring-1 focus:ring-[#FF2C78] focus:border-[#FF2C78]"
+						className="p-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
 					/>
 					<input
 						{...register("complemento")}
 						placeholder="Complemento"
-						className="p-3 border rounded-xl focus:outline-none focus:ring-1 focus:ring-[#FF2C78] focus:border-[#FF2C78]"
+						className="p-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
 					/>
 					<input
 						{...register("bairro")}
 						placeholder="Bairro"
-						className="p-3 border rounded-xl focus:outline-none focus:ring-1 focus:ring-[#FF2C78] focus:border-[#FF2C78]"
+						className="p-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
 					/>
 					<input
 						{...register("localidade")}
 						placeholder="Cidade"
-						className="p-3 border rounded-xl focus:outline-none focus:ring-1 focus:ring-[#FF2C78] focus:border-[#FF2C78]"
+						className="p-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
 					/>
 					<input
 						{...register("uf")}
 						placeholder="UF"
-						className="p-3 border rounded-xl focus:outline-none focus:ring-1 focus:ring-[#FF2C78] focus:border-[#FF2C78]"
+						className="p-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
 					/>
 				</div>
 
 				<button
 					type="submit"
-					className="w-full bg-[#FF2C78] hover:bg-[#E6005C] text-white text-lg py-3 rounded-xl font-semibold shadow-md transition-all duration-300"
+					className="w-full bg-blue-600 hover:bg-blue-700 text-white text-lg py-3 rounded-xl font-semibold shadow-md transition-all duration-300 hover:scale-105"
 				>
 					Cadastrar Usuário
 				</button>

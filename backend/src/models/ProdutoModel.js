@@ -1,27 +1,28 @@
 import db from "../conexao.js";
 import mysql from "mysql2/promise";
+import bcrypt from "bcryptjs";
 
-//Criando conexão com a databse inet
+// Criando pool de conexão
 const conexao = mysql.createPool(db);
 
-//Criando Produto
-export const criandoProduto = async (nome, preco, descricao, usuario_id, categoria_id) => {
+// Criar Produto
+export const criandoProduto = async (
+	nome,
+	preco,
+	descricao,
+	usuario_id,
+	categoria_id
+) => {
 	console.log("ProdutoModel :: criandoProduto");
 
-	//SQl de Inserção
-	const sql = `INSERT INTO 
-                    products (nome, preco, descricao, usuario_id, categoria_id)
-                    VALUES (?, ?, ?, ?, ?)`;
-
-	//parametros de inserção
+	const sql = `INSERT INTO products (nome, preco, descricao, usuario_id, categoria_id)
+	             VALUES (?, ?, ?, ?, ?)`;
 	const params = [nome, preco, descricao, usuario_id, categoria_id];
 
 	try {
 		const [resposta] = await conexao.query(sql, params);
-		//console.log(resposta)
 		return [201, {resposta: "Produto cadastrado com sucesso"}];
 	} catch (error) {
-		//console.error(error);
 		return [
 			500,
 			{
@@ -32,23 +33,56 @@ export const criandoProduto = async (nome, preco, descricao, usuario_id, categor
 		];
 	}
 };
-export const criandoUsuario = async (nome, email, senha, whatsapp, telefone, cpf, logo, descricao, cep, logradouro, numero, bairro, uf, complemento ,localidade ) => {
+
+// Criar Usuário
+export const criandoUsuario = async (
+	nome,
+	email,
+	senha,
+	whatsapp,
+	telefone,
+	cpf,
+	logo,
+	descricao,
+	cep,
+	logradouro,
+	numero,
+	bairro,
+	uf,
+	complemento,
+	localidade
+) => {
 	console.log("ProdutoModel :: criandoUsuario");
 
-	//SQl de Inserção
-	const sql = `INSERT INTO 
-                    users (nome, email, senha, whatsapp, telefone, cpf, logo, descricao, cep, logradouro, numero, bairro, uf, complemento, localidade)
-                      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+	const hash = bcrypt.hashSync(senha, bcrypt.genSaltSync(10));
 
-	//parametros de inserção
-	const params = [nome, email, senha, whatsapp, telefone, cpf, logo, descricao, cep, logradouro, numero, bairro, uf, complemento, localidade];
+	const sql = `INSERT INTO users (
+		nome, email, senha, whatsapp, telefone, cpf, logo, descricao,
+		cep, logradouro, numero, bairro, uf, complemento, localidade
+	) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+
+	const params = [
+		nome,
+		email,
+		hash,
+		whatsapp,
+		telefone,
+		cpf,
+		logo,
+		descricao,
+		cep,
+		logradouro,
+		numero,
+		bairro,
+		uf,
+		complemento,
+		localidade,
+	];
 
 	try {
 		const [resposta] = await conexao.query(sql, params);
-		//console.log(resposta)
 		return [201, {resposta: "Usuário cadastrado com sucesso"}];
 	} catch (error) {
-		//console.error(error);
 		return [
 			500,
 			{
@@ -60,19 +94,16 @@ export const criandoUsuario = async (nome, email, senha, whatsapp, telefone, cpf
 	}
 };
 
-//Mostrando produtos da Tabela produtos
+// Listar todos os usuários
 export const mostrarUsuarios = async () => {
 	console.log("ProdutoModel :: mostrarUsuarios");
 
-	//SQL Para realizar consulta
 	const sql = "SELECT * FROM users";
+
 	try {
-		//Pegando primeiro array de resposta
 		const [resposta] = await conexao.query(sql);
-		//console.log(resposta);
 		return [200, resposta];
 	} catch (error) {
-		//console.error(error);
 		return [
 			500,
 			{
@@ -83,6 +114,8 @@ export const mostrarUsuarios = async () => {
 		];
 	}
 };
+
+// Listar usuário por ID
 export const mostrarUsuarioPorId = async (id) => {
 	console.log("ProdutoModel :: mostrarUsuarioPorId");
 
@@ -90,9 +123,11 @@ export const mostrarUsuarioPorId = async (id) => {
 
 	try {
 		const [resposta] = await conexao.query(sql, [id]);
+
 		if (resposta.length === 0) {
 			return [404, {mensagem: "Usuário não encontrado"}];
 		}
+
 		return [200, resposta[0]];
 	} catch (error) {
 		return [
@@ -106,18 +141,16 @@ export const mostrarUsuarioPorId = async (id) => {
 	}
 };
 
+// Listar todos os produtos
 export const mostrarProdutos = async () => {
 	console.log("ProdutoModel :: mostrarProdutos");
 
-	//SQL Para realizar consulta
 	const sql = "SELECT * FROM products";
+
 	try {
-		//Pegando primeiro array de resposta
 		const [resposta] = await conexao.query(sql);
-		//console.log(resposta);
 		return [200, resposta];
 	} catch (error) {
-		//console.error(error);
 		return [
 			500,
 			{
@@ -128,35 +161,39 @@ export const mostrarProdutos = async () => {
 		];
 	}
 };
+
+// Listar produtos de um usuário
 export const mostrarProdutosDoUsuario = async (id) => {
-    console.log("ProdutoModel :: mostrarProdutosDoUsuario");
+	console.log("ProdutoModel :: mostrarProdutosDoUsuario");
 
-    const sql = "SELECT * FROM products WHERE usuario_id = ?";
-    const params = [id];
+	const sql = "SELECT * FROM products WHERE usuario_id = ?";
+	const params = [id];
 
-    try {
-        const [resposta] = await conexao.query(sql, params);
-        return [200, resposta];
-    } catch (error) {
-        return [500, {
-            mensagem: "Erro Servidor",
-            code: error.code,
-            sql: error.sqlMessage
-        }];
-    }
+	try {
+		const [resposta] = await conexao.query(sql, params);
+		return [200, resposta];
+	} catch (error) {
+		return [
+			500,
+			{
+				mensagem: "Erro Servidor",
+				code: error.code,
+				sql: error.sqlMessage,
+			},
+		];
+	}
 };
+
+// Listar todas as categorias
 export const mostrarCategorias = async () => {
 	console.log("ProdutoModel :: mostrarCategorias");
 
-	//SQL Para realizar consulta
 	const sql = "SELECT * FROM categories";
+
 	try {
-		//Pegando primeiro array de resposta
 		const [resposta] = await conexao.query(sql);
-		//console.log(resposta);
 		return [200, resposta];
 	} catch (error) {
-		//console.error(error);
 		return [
 			500,
 			{
@@ -168,24 +205,22 @@ export const mostrarCategorias = async () => {
 	}
 };
 
+// Atualizar nome de um produto
 export const atualizandoProduto = async (id_produto, nomeProduto) => {
 	console.log("ProdutoModel :: atualizandoProduto");
 
-	//SQL Update produto
 	const sql = `UPDATE produtos SET nome_produto = ? WHERE id_produto = ?`;
-
 	const params = [nomeProduto, id_produto];
 
 	try {
 		const [resposta] = await conexao.query(sql, params);
-		//console.log(resposta);
+
 		if (resposta.affectedRows < 1) {
 			return [404, {mensagem: "Produto não encontrado"}];
-		} else {
-			return [200, {mensagem: "Produto atualizado com sucesso"}];
 		}
+
+		return [200, {mensagem: "Produto atualizado com sucesso"}];
 	} catch (error) {
-		//console.error(error);
 		return [
 			500,
 			{
@@ -197,24 +232,22 @@ export const atualizandoProduto = async (id_produto, nomeProduto) => {
 	}
 };
 
+// Deletar produto por ID
 export const deletandoProduto = async (id_produto) => {
 	console.log("ProdutoModel :: deletandoProduto");
 
-	//SQL Deletando Produto
 	const sql = `DELETE FROM produtos WHERE id_produto = ?`;
-
 	const params = [id_produto];
 
 	try {
 		const [resposta] = await conexao.query(sql, params);
-		//console.log(resposta);
+
 		if (resposta.affectedRows < 1) {
 			return [404, {mensagem: "Produto não encontrado"}];
-		} else {
-			return [200, {mensagem: "Produto deletado com sucesso"}];
 		}
+
+		return [200, {mensagem: "Produto deletado com sucesso"}];
 	} catch (error) {
-		//console.error(error);
 		return [
 			500,
 			{
@@ -225,7 +258,50 @@ export const deletandoProduto = async (id_produto) => {
 		];
 	}
 };
-//console.log(await deletandoProduto(7));
-//atualizandoProduto(6,'tangirina');
-//criandoProduto('melancia');
-//mostrarProdutos();
+
+export const verificarUsuarioSenha = async (email, senha) => {
+	console.log("UsuarioModel :: verificarUsuarioSenha");
+
+	// Corrigindo a consulta para buscar o nome na tabela correta
+	const sql = `SELECT * FROM users WHERE email=?`; // Certifique-se de que a tabela se chama 'users'
+	const params = [email]; // Passando o email corretamente
+
+	try {
+		const [resposta] = await conexao.query(sql, params);
+
+		if (resposta.length < 1) {
+			return [401, {mensagem: "Usuário não encontrado!!!"}];
+		}
+
+		const hash = resposta[0].senha;
+
+		// Log para debugar
+		console.log("Senha enviada:", senha);
+		console.log("Hash no banco:", hash);
+
+		// Comparação da senha
+		const autenticado = bcrypt.compareSync(senha, hash);
+
+		// Resultado da comparação
+		console.log("Resultado da comparação:", autenticado);
+
+		if (autenticado) {
+			return [
+				200,
+				{mensagem: "Usuário logado", id_usuario: resposta[0].id_usuario},
+			];
+		} else {
+			return [401, {mensagem: "Senha incorreta"}];
+		}
+	} catch (error) {
+		console.error({
+			mensagem: "Erro Servidor",
+			code: error.code,
+			sql: error.sqlMessage, // Corrigindo o campo para sqlMessage
+		});
+		return [
+			500,
+			{mensagem: "Erro Servidor", code: error.code, sql: error.sqlMessage},
+		];
+	}
+};

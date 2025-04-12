@@ -11,6 +11,7 @@ import {
   readUserById,
   createUser,
   readProductsByUser,
+  login,
 } from "./controllers/ProdutoController.js";
 
 const app = express();
@@ -36,6 +37,9 @@ app.post("/usuario", createUser);
 app.get("/users", readUser);
 app.get("/user/:id", readUserById);
 app.get("/user/produts/:id", readProductsByUser);
+
+app.post('/login',login);
+
 
 // Inicialização do servidor
 app.listen(PORT, () => {

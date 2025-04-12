@@ -8,6 +8,7 @@ import Cadastro from "./pages/Cadastro.jsx";
 // Importa as páginas que serão utilizados 
 import App from "./App.jsx";
 import Home from "./pages/Home.jsx";
+import Login from "./pages/Login.jsx";
 
 
 // Cria as rotas da aplicação
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
     // Define a rota raiz da aplicação
     path: "/",
     element: <Home />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
   },
   {
     path: "/cadastro",

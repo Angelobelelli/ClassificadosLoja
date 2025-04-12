@@ -5,142 +5,95 @@ import {
 	mostrarUsuarios,
 	mostrarProdutos,
 	mostrarCategorias,
-    mostrarUsuarioPorId,
-    criandoUsuario,
-    mostrarProdutosDoUsuario,
+	mostrarUsuarioPorId,
+	criandoUsuario,
+	mostrarProdutosDoUsuario,
+	verificarUsuarioSenha,
 } from "../models/ProdutoModel.js";
 
-//CRUD Produto
+// Função utilitária para tratar requisições com try/catch
+const handleRequest = async (res, fn) => {
+	try {
+		const [status, resposta] = await fn();
+		return res.status(status).json(resposta);
+	} catch (error) {
+		console.error(error);
+		return res.status(500).json({ mensagem: "Erro interno no servidor" });
+	}
+};
+
+// CRUD Produto
 export const createProduto = async (req, res) => {
 	console.log("ProdutoController :: createProduto");
-	const nome = req.body.nome;
-    const preco = req.body.preco;
-    const descricao = req.body.descricao;
-    const usuario_id = req.body.usuario_id;
-    const categoria_id = req.body.categoria_id;
 
-	try {
-		const [status, resposta] = await criandoProduto(nome, preco, descricao, usuario_id, categoria_id);
-		res.status(status).json(resposta);
-	} catch (error) {
-		//console.log(error);
-		res.status(500).json({mensagem: "erro ao criar produto"});
-	}
+	const { nome, preco, descricao, usuario_id, categoria_id } = req.body;
+
+	await handleRequest(res, () =>
+		criandoProduto(nome, preco, descricao, usuario_id, categoria_id)
+	);
 };
+
 export const createUser = async (req, res) => {
-    console.log("ProdutoController :: createUser");
-    const nome = req.body.nome;
-    const email = req.body.email;
-    const senha = req.body.senha;
-    const whatsapp = req.body.whatsapp;
-    const telefone = req.body.telefone;
-    const cpf = req.body.cpf;
-    const logo = req.body.logo;
-    const descricao = req.body.descricao;
-	const cep = req.body.cep;
-	const logradouro = req.body.logradouro;
-	const numero = req.body.numero;
-	const bairro = req.body.bairro;
-	const uf = req.body.uf;
-	const complemento = req.body.complemento;
-	const localidade = req.body.localidade;
+	console.log("ProdutoController :: createUser");
 
+	const {
+		nome, email, senha, whatsapp, telefone, cpf, logo,
+		descricao, cep, logradouro, numero, bairro, uf, complemento, localidade
+	} = req.body;
 
-    try {
-        const [status, resposta] = await criandoUsuario(nome, email, senha, whatsapp, telefone, cpf, logo, descricao, cep, logradouro, numero, bairro, uf, complemento, localidade);
-        res.status(status).json(resposta);
-    } catch (error) {
-        //console.log(error);
-        res.status(500).json({mensagem: "erro ao criar Usuario"});
-    }
-}
+	await handleRequest(res, () =>
+		criandoUsuario(
+			nome, email, senha, whatsapp, telefone, cpf, logo,
+			descricao, cep, logradouro, numero, bairro, uf, complemento, localidade
+		)
+	);
+};
+
 export const readUser = async (req, res) => {
 	console.log("ProdutoController :: readUser");
-
-	try {
-		const [status, resposta] = await mostrarUsuarios();
-		res.status(status).json(resposta);
-	} catch (error) {
-		//console.log(error);
-		res.status(500).json({mensagem: "erro ao mostrar produto"});
-	}
+	await handleRequest(res, mostrarUsuarios);
 };
+
 export const readUserById = async (req, res) => {
 	console.log("ProdutoController :: readUserById");
-
-	const id = req.params.id;
-
-	try {
-		const [status, resposta] = await mostrarUsuarioPorId(id);
-		res.status(status).json(resposta);
-	} catch (error) {
-		res.status(500).json({mensagem: "Erro ao buscar usuário"});
-	}
+	const { id } = req.params;
+	await handleRequest(res, () => mostrarUsuarioPorId(id));
 };
 
 export const readProducts = async (req, res) => {
 	console.log("ProdutoController :: readProducts");
-
-	try {
-		const [status, resposta] = await mostrarProdutos();
-		res.status(status).json(resposta);
-	} catch (error) {
-		//console.log(error);
-		res.status(500).json({mensagem: "erro ao mostrar produto"});
-	}
+	await handleRequest(res, mostrarProdutos);
 };
 
-
-
-
 export const readProductsByUser = async (req, res) => {
-    console.log("ProdutoController :: readProductsByUser");
-
-    const id = req.params.id; // Pegando o ID do usuário da URL
-
-    try {
-        const [status, resposta] = await mostrarProdutosDoUsuario(id);
-        res.status(status).json(resposta);
-    } catch (error) {
-        res.status(500).json({ mensagem: "Erro ao buscar produtos do usuário" });
-    }
+	console.log("ProdutoController :: readProductsByUser");
+	const { id } = req.params;
+	await handleRequest(res, () => mostrarProdutosDoUsuario(id));
 };
 
 export const readCategorys = async (req, res) => {
-	console.log("ProdutoController :: readProducts");
-
-	try {
-		const [status, resposta] = await mostrarCategorias();
-		res.status(status).json(resposta);
-	} catch (error) {
-		//console.log(error);
-		res.status(500).json({mensagem: "erro ao mostrar produto"});
-	}
+	console.log("ProdutoController :: readCategorys");
+	await handleRequest(res, mostrarCategorias);
 };
 
 export const updateProduto = async (req, res) => {
 	console.log("ProdutoController :: updateProduto");
-	const id_produto = req.params.id_produto;
-	const nome = req.body.nome;
+	const { id_produto } = req.params;
+	const { nome } = req.body;
 
-	try {
-		const [status, resposta] = await atualizandoProduto(id_produto, nome);
-		res.status(status).json(resposta);
-	} catch (error) {
-		//console.log(error);
-		res.status(500).json({mensagem: "erro ao atualizar produto"});
-	}
+	await handleRequest(res, () => atualizandoProduto(id_produto, nome));
 };
 
 export const deleteProduto = async (req, res) => {
 	console.log("ProdutoController :: deleteProduto");
-	const id_produto = req.params.id_produto;
+	const { id_produto } = req.params;
 
-	try {
-		const [status, resposta] = await deletandoProduto(id_produto);
-		res.status(status).json(resposta);
-	} catch (error) {
-		//console.log(error);
-		res.status(500).json({mensagem: "erro ao deletar produto"});
-	}
+	await handleRequest(res, () => deletandoProduto(id_produto));
+};
+
+export const login = async (req, res) => {
+	console.log("UsuarioController :: login");
+	const { email, senha } = req.body;
+
+	await handleRequest(res, () => verificarUsuarioSenha(email, senha));
 };
