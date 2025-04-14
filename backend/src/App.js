@@ -10,9 +10,9 @@ const PORT = process.env.PORT || 3001;
 app.use(cors());
 app.use(express.json());
 
-app.use("/usuarios", usuarioRoutes);
-app.use("/produtos", produtoRoutes);
-app.use("/categorias", categoriaRoutes);
+app.use("/users", usuarioRoutes);
+app.use("/products", produtoRoutes);
+app.use("/categories", categoriaRoutes);
 
 app.get("/", (req, res) => {
 	res.send("API rodando com sucesso! 🚀");

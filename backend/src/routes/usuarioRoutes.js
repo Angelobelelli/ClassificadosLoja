@@ -1,16 +1,16 @@
 import express from "express";
 import {
-	cadastrarUsuario,
-	listarTodosUsuarios,
-	buscarUsuarioPorId,
-	loginUsuario,
+	createUsers,
+	readUsers,
+	readUsersID,
+	loginUsers
 } from "../controllers/usuarioController.js";
 
 const router = express.Router();
 
-router.post("/cadastrar", cadastrarUsuario);
-router.get("/", listarTodosUsuarios);
-router.get("/:id", buscarUsuarioPorId);
-router.post("/login", loginUsuario);
+router.post("/cadastrar", createUsers);
+router.get("/", readUsers);
+router.get("/:id", readUsersID);
+router.post("/login", loginUsers);
 
 export default router;

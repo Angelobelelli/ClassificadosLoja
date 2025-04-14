@@ -1,6 +1,6 @@
 import * as Usuario from "../models/usuarioModel.js";
 
-export const cadastrarUsuario = async (req, res) => {
+export const createUsers = async (req, res) => {
 	try {
 		const [status, resposta] = await Usuario.criarUsuario(req.body);
 		res.status(status).json(resposta);
@@ -10,7 +10,7 @@ export const cadastrarUsuario = async (req, res) => {
 	}
 };
 
-export const listarTodosUsuarios = async (req, res) => {
+export const readUsers = async (req, res) => {
 	try {
 		const [status, resposta] = await Usuario.listarUsuarios();
 		res.status(status).json(resposta);
@@ -20,7 +20,7 @@ export const listarTodosUsuarios = async (req, res) => {
 	}
 };
 
-export const buscarUsuarioPorId = async (req, res) => {
+export const readUsersID = async (req, res) => {
 	try {
 		const { id } = req.params;
 		const [status, resposta] = await Usuario.listarUsuarioPorId(id);
@@ -31,7 +31,7 @@ export const buscarUsuarioPorId = async (req, res) => {
 	}
 };
 
-export const loginUsuario = async (req, res) => {
+export const loginUsers = async (req, res) => {
 	try {
 		const { email, senha } = req.body;
 		const [status, resposta] = await Usuario.verificarUsuarioSenha(email, senha);
