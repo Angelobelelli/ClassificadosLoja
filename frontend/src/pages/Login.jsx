@@ -26,7 +26,7 @@ const Login = () => {
     console.log("Dados enviados:", formData);
 
     api
-      .post("/login", formData)
+      .post("/usuarios/login", formData)
       .then((response) => {
         alert("Usuário Logado com sucesso!");
         reset();
