@@ -83,7 +83,8 @@ export const verificarUsuarioSenha = async (email, senha) => {
 	try {
 		const [resposta] = await conexao.query(
 			"SELECT * FROM users WHERE email = ?",
-			[email]
+			[email],
+		
 		);
 		if (resposta.length < 1) {
 			return [401, {mensagem: "Usuário não encontrado"}];
@@ -106,11 +107,28 @@ export const verificarUsuarioSenha = async (email, senha) => {
 };
 
 // Tratamento de erro
-const tratarErro = (error) => [
-	500,
-	{
-		mensagem: "Erro Servidor",
-		code: error.code,
-		sql: error.sqlMessage,
-	},
-];
+const tratarErro = (error) => {
+  console.error("Erro no servidor:", error); // Log completo no terminal
+
+  // Mensagem padrão
+  let mensagem = "Erro interno no servidor.";
+
+  // Mensagens específicas
+  if (error.code === "ER_DUP_ENTRY") {
+    mensagem = "Já existe um registro com esses dados.";
+  } else if (error.code === "ER_BAD_NULL_ERROR") {
+    mensagem = "Campo obrigatório não foi preenchido.";
+  } else if (error.code === "ER_NO_REFERENCED_ROW_2") {
+    mensagem = "Chave estrangeira inválida.";
+  } else if (error.code === "ER_TRUNCATED_WRONG_VALUE_FOR_FIELD") {
+    mensagem = "Formato inválido para algum campo.";
+  }
+
+  return [
+    500,
+    {
+      mensagem,
+      erroDetalhado: process.env.NODE_ENV === "development" ? error.message : undefined,
+    },
+  ];
+};

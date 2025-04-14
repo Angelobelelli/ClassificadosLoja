@@ -1,9 +1,10 @@
+import mysql from 'mysql2/promise';
 
-const db = {
+const db = await mysql.createConnection({
     host:'localhost',
     user:'root',
     password:'',
     database:'classificados',
-}
+});
 
 export default db;
