@@ -41,7 +41,7 @@ const Header = () => {
 
 			<div className="flex gap-4">
 				
-					<NavLink className="bg-[#FF2C78] rounded-full px-5 py-2 w-[150px] cursor-pointer hover:bg-[#E6005C] transition" to="/cadastro">
+					<NavLink className="bg-[#FF2C78] rounded-full px-5 py-2 w-[150px] cursor-pointer hover:bg-[#E6005C] transition" to="/login">
 						<h1>Anunciar</h1>
 					</NavLink>
 			

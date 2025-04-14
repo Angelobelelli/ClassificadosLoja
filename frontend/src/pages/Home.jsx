@@ -19,7 +19,7 @@ const Main = () => {
 					<section className="pt-24 pb-12 mb-20 bg-gradient-to-br from-[#ce007c] to-[#5e1040] text-white w-full">
 						<div className="px-4 py-12 max-w-3xl mx-auto text-center">
 							<h1 className="text-4xl md:text-5xl font-bold mb-4">
-								Classificados Nova Almeida e Região
+								Sistema de Classificados
 							</h1>
 							<p className="text-xl mb-8 text-indigo-100">
 								O maior portal de classificados da região. Encontre o que
