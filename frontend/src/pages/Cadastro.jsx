@@ -29,7 +29,7 @@ const CadastroUsuario = () => {
 					setValue("logradouro", logradouro);
 					setValue("complemento", complemento);
 					setValue("bairro", bairro);
-					setValue("cidade", localidade);
+					setValue("localidade", localidade);
 					setValue("uf", uf);
 					setValue("numero", numero); // Limpa o campo número
 				} catch (error) {
@@ -123,8 +123,55 @@ const CadastroUsuario = () => {
 							<p className="text-red-500 text-sm">CPF é obrigatório.</p>
 						)}
 					</div>
-				</div>
+					
+					<div className="flex flex-col">
+						<label className="font-medium text-gray-700">Whastapp</label>
+						<input
+							{...register("whatsapp", {required: true})}
+							placeholder="Digite seu Whatsapp"
+							className="border border-gray-300 rounded-lg px-4 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300"
+						/>
+						{errors?.whatsapp && (
+							<p className="text-red-500 text-sm">Whatsapp é obrigatório.</p>
+						)}
+					</div>
+					<div className="flex flex-col">
+						<label className="font-medium text-gray-700">Telefone</label>
+						<input
+							{...register("telefone", {required: true})}
+							placeholder="Digite seu telefone"
+							className="border border-gray-300 rounded-lg px-4 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300"
+						/>	
+						{errors?.telefone && (
+							<p className="text-red-500 text-sm">Telefone é obrigatório.</p>
+						)}
+					</div>
+					<div className="flex flex-col">
+						<label className="font-medium text-gray-700">Imagem</label>
+						<input
+							{...register("image", {required: true})}
+							placeholder="Carrege sua imagem"
+							className="border border-gray-300 rounded-lg px-4 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300"
+						/>
+						{errors?.image && (
+							<p className="text-red-500 text-sm">Imagem é obrigatório.</p>
+						)}
+					</div>
+					<div className="flex flex-col">
+						<label className="font-medium text-gray-700">Logo</label>
+						<input
+							{...register("logo", {required: true})}
+							placeholder="Carrege sua logo"
+							className="border border-gray-300 rounded-lg px-4 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300"
+						/>
+						{errors?.logo && (
+							<p className="text-red-500 text-sm">Logo é obrigatório.</p>
+						)}
+					</div>
 
+				</div>	
+
+				
 				
 				<div className="flex flex-col">
 					<label className="font-medium text-gray-700">Descrição breve</label>
