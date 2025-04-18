@@ -4,7 +4,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node src/App.js",
+    "start": "node --watch src/App.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -13,7 +13,7 @@
     "SQL",
     "MySQL"
   ],
-  "author": "Ramon de HOlanda",
+  "author": "Angelo Belelli",
   "license": "ISC",
   "description": "",
   "dependencies": {
