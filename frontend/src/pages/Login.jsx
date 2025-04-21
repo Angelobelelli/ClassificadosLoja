@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Link, redirect} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {User, Lock} from "lucide-react";
 import api from "../api/api"; // Importa a instância do Axios configurada
 import { useNavigate } from "react-router";
@@ -35,22 +35,22 @@ const Login = () => {
 				if (response.status === 200) {
 					return  navigate("/");
 				}
+				if (response.status === 401) {
+					return alert("Dados Incorretos")
+				}
 				alert("Usuário Logado com sucesso!");
 				reset();
 			})
 			.catch((error) => {
 				alert(error.response.data.mensagem);
 				console.error("Erro:", error);
+				
 				if (error.response) {
 					console.error("Resposta da API:", error.response.data);
 				}
+				
 			});
-		if (users === 0) {
-			alert("Usuário não encontrado!");
-		}
-		if (senha === 0) {
-			alert("Senha incorreta!");
-		}
+		
 	};
 
 	return (
