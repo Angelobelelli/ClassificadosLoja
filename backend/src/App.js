@@ -21,6 +21,7 @@ app.get("/teste", (req, res) => {
 	res.status(200).json({mensagem: "Funcionando!"});
 });
 
+
 app.listen(PORT, () => {
 	console.log(`Servidor rodando na porta ${PORT}`);
 });

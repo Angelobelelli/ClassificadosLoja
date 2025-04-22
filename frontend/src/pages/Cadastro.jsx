@@ -3,6 +3,7 @@ import {useForm} from "react-hook-form";
 import axios from "axios";
 import api from "../api/api";
 import {useNavigate} from "react-router";
+import validator from "validator";
 
 const CadastroUsuario = () => {
 	const {
@@ -88,12 +89,19 @@ const CadastroUsuario = () => {
 					<div className="flex flex-col">
 						<label className="font-medium text-gray-700">Email</label>
 						<input
-							{...register("email", {required: true})}
+							type="email"
 							placeholder="Digite seu email"
+							{...register("email", {
+								required: true,
+								validate: (value) => validator.isEmail(value),
+							})}
 							className="border border-gray-300 rounded-lg px-4 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300"
 						/>
-						{errors?.email && (
+						{errors?.email?.type === "required" && (
 							<p className="text-red-500 text-sm">Email é obrigatório.</p>
+						)}
+						{errors?.email?.type === "validate" && (
+							<p className="text-red-500 text-sm">Email não é validado.</p>
 						)}
 					</div>
 				</div>
@@ -102,13 +110,18 @@ const CadastroUsuario = () => {
 					<div className="flex flex-col">
 						<label className="font-medium text-gray-700">Senha</label>
 						<input
-							{...register("senha", {required: true})}
+							{...register("senha", {required: true, minLength: 6})}
 							type="password"
 							placeholder="Digite sua senha"
 							className="border border-gray-300 rounded-lg px-4 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300"
 						/>
-						{errors?.senha && (
-							<p className="text-red-500 text-sm">Senha é obrigatória.</p>
+						{errors?.senha?.type === "minLength" && (
+							<p className="text-red-500 text-sm">
+								A senha deve ter pelo menos 6 caracteres.
+							</p>
+						)}
+						{errors?.senha?.type === "required" && (
+							<p className="text-red-500 text-sm">A senha é obrigatória.</p>
 						)}
 					</div>
 
@@ -123,7 +136,7 @@ const CadastroUsuario = () => {
 							<p className="text-red-500 text-sm">CPF é obrigatório.</p>
 						)}
 					</div>
-					
+
 					<div className="flex flex-col">
 						<label className="font-medium text-gray-700">Whastapp</label>
 						<input
@@ -141,7 +154,7 @@ const CadastroUsuario = () => {
 							{...register("telefone", {required: true})}
 							placeholder="Digite seu telefone"
 							className="border border-gray-300 rounded-lg px-4 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300"
-						/>	
+						/>
 						{errors?.telefone && (
 							<p className="text-red-500 text-sm">Telefone é obrigatório.</p>
 						)}
@@ -168,11 +181,8 @@ const CadastroUsuario = () => {
 							<p className="text-red-500 text-sm">Logo é obrigatório.</p>
 						)}
 					</div>
+				</div>
 
-				</div>	
-
-				
-				
 				<div className="flex flex-col">
 					<label className="font-medium text-gray-700">Descrição breve</label>
 					<textarea
@@ -187,7 +197,9 @@ const CadastroUsuario = () => {
 					)}
 				</div>
 
-				<h3 className="text-xl font-semibold text-blue-600 mt-6 text-center">Endereço</h3>
+				<h3 className="text-xl font-semibold text-blue-600 mt-6 text-center">
+					Endereço
+				</h3>
 				<div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-2">
 					{[
 						"cep",

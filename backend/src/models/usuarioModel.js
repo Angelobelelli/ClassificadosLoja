@@ -98,7 +98,7 @@ export const verificarUsuarioSenha = async (email, senha) => {
 				{mensagem: "Usuário logado", id_usuario: resposta[0].id_usuario},
 			];
 		} else {
-			return [401, {mensagem: "Senha incorreta"}];
+			return [404, {mensagem: "Dados Incorretos"}];
 		}
 	} catch (error) {
 		return tratarErro(error);
