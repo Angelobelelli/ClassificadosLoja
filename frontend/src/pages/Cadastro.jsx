@@ -186,11 +186,11 @@ const CadastroUsuario = () => {
 				<div className="flex flex-col">
 					<label className="font-medium text-gray-700">Descrição breve</label>
 					<textarea
-						{...register("descricaoLoja", {required: true})}
+						{...register("descricao", {required: true})}
 						placeholder="Digite uma breve descrição da loja"
 						className="border border-gray-300 rounded-lg px-4 py-2 h-24 resize-none shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300"
 					/>
-					{errors?.descricaoLoja && (
+					{errors?.descricao && (
 						<p className="text-red-500 text-sm">
 							Descrição da loja é obrigatória.
 						</p>
