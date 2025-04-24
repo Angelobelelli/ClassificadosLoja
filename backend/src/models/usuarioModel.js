@@ -1,5 +1,6 @@
 import conexao from "../../conexao.js";
 import bcrypt from "bcryptjs";
+import {v4 as uuidv4} from "uuid";
 
 // Criar usuário
 export const criarUsuario = async (dados) => {
@@ -20,14 +21,15 @@ export const criarUsuario = async (dados) => {
 		complemento,
 		localidade,
 	} = dados;
-
+	const id = uuidv4();
 	const hash = bcrypt.hashSync(senha, bcrypt.genSaltSync(10));
 	const sql = `INSERT INTO users (
-		nome, email, senha, whatsapp, telefone, cpf, logo, descricao,
+		id, nome, email, senha, whatsapp, telefone, cpf, logo, descricao,
 		cep, logradouro, numero, bairro, uf, complemento, localidade
-	) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+	) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)`;
 
 	const params = [
+		id,
 		nome,
 		email,
 		hash,
