@@ -10,7 +10,7 @@ import {
 const router = express.Router();
 
 router.post("/", cadastrarProduto);
-router.get("/users", listarTodosProdutos);
+router.get("/products", listarTodosProdutos);
 router.get("/usuario/:usuario_id", listarProdutosPorUsuario);
 router.put("/:id", atualizarProduto);
 router.delete("/:id", excluirProduto);

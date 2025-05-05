@@ -20,10 +20,10 @@ const Header = () => {
 					Home
 				</Link>
 				<Link
-					to="/classificados"
+					to="/anuncios"
 					className="text-[#6F767D] hover:text-blue-400 transition-colors duration-200"
 				>
-					Classificados
+					Anuncios
 				</Link>
 				<Link
 					to="/categorias"
