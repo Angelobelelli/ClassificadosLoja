@@ -30,7 +30,7 @@ const Login = () => {
 		console.log("Dados enviados:", formData);
 
 		api
-			.post("/users/login", formData)
+			.post("/login", formData)
 			.then((response) => {
 				if (response.status === 200) {
 					return  navigate("/");
