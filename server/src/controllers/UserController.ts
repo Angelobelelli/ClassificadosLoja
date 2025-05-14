@@ -87,30 +87,32 @@ export const UserController = {
 
 	// Login de usuário
 	async login(
-	req: FastifyRequest<{ Body: { email: string; senha: string } }>,
-	reply: FastifyReply
-) {
-	const { email, senha } = req.body;
+		req: FastifyRequest<{Body: {email: string; senha: string}}>,
+		reply: FastifyReply
+	) {
+		const {email, senha} = req.body;
 
-	if (!email || !senha) {
-		return reply.code(400).send({ message: "Email e senha são obrigatórios" });
-	}
-
-	try {
-		const user = await UserModel.checkLogin(email, senha);
-		
-		if (!user) {
-			return reply.code(401).send({ message: "Credenciais inválidas" });
+		if (!email || !senha) {
+			return reply.code(400).send({message: "Email e senha são obrigatórios"});
 		}
 
-		const token = jwt.sign({ id_usuario: user.valueOf }, env.JWT_SECRET, {
-			expiresIn: '1h',
-		});
+		try {
+			const user = await UserModel.checkLogin(email, senha);
 
-		reply.send({ token });
-	} catch (error) {
-		console.error(error);
-		reply.code(500).send({ message: "Erro ao fazer login" });
-	}
-}
+			if (!user) {
+				return reply.code(401).send({message: "Credenciais inválidas"});
+			}
+
+			const token = jwt.sign(
+				{id_usuario: user.valueOf, email: user.valueOf},
+				env.JWT_SECRET,
+				{expiresIn: "1h"}
+			);
+
+			return reply.send({token});
+		} catch (error) {
+			console.error(error);
+			reply.code(500).send({message: "Erro ao fazer login"});
+		}
+	},
 };

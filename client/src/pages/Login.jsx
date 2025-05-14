@@ -2,14 +2,12 @@ import React, {useState} from "react";
 import {Link} from "react-router-dom";
 import {User, Lock} from "lucide-react";
 import api from "../api/api"; // Importa a instância do Axios configurada
-import { useNavigate } from "react-router";
-
+import {useNavigate} from "react-router";
 
 const Login = () => {
 	const [formData, setFormData] = useState({
 		email: "",
 		senha: "",
-    
 	});
 
 	const handleInputChange = (e) => {
@@ -23,7 +21,7 @@ const Login = () => {
 			senha: "",
 		});
 	};
-  let navigate = useNavigate();
+	let navigate = useNavigate();
 
 	const handleSubmit = (e) => {
 		e.preventDefault(); // Impede o comportamento padrão de recarregar a página
@@ -32,25 +30,20 @@ const Login = () => {
 		api
 			.post("/login", formData)
 			.then((response) => {
-				if (response.status === 200) {
-					return  navigate("/");
+				if (response.status === 200 && response.data.token) {
+					localStorage.setItem("token", response.data.token);
+					navigate("/");
 				}
-				if (response.status === 401) {
-					return alert("Dados Incorretos")
-				}
-				alert("Usuário Logado com sucesso!");
 				reset();
 			})
 			.catch((error) => {
 				alert(error.response.data.mensagem);
 				console.error("Erro:", error);
-				
+
 				if (error.response) {
 					console.error("Resposta da API:", error.response.data);
 				}
-				
 			});
-		
 	};
 
 	return (
@@ -88,7 +81,6 @@ const Login = () => {
 									aria-label="Email"
 								/>
 							</div>
-							
 						</div>
 
 						<div>
