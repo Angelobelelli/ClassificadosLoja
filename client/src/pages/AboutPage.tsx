@@ -44,7 +44,7 @@ const AboutPage: React.FC = () => {
           Sobre o ClassiMarket
         </h1>
         <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-          Somos a plataforma de classificados que conecta pessoas em todo o Brasil,
+          Somos a plataforma de classificados que conecta pessoas em todo o Brasil, 
           facilitando a compra e venda de produtos de forma segura e eficiente.
         </p>
       </section>
@@ -54,8 +54,8 @@ const AboutPage: React.FC = () => {
         <div className="text-center">
           <h2 className="text-3xl font-bold text-gray-900 mb-4">Nossa Missão</h2>
           <p className="text-lg text-gray-700 max-w-3xl mx-auto">
-            Democratizar o comércio online, oferecendo uma plataforma simples,
-            segura e acessível para que qualquer pessoa possa comprar e vender
+            Democratizar o comércio online, oferecendo uma plataforma simples, 
+            segura e acessível para que qualquer pessoa possa comprar e vender 
             produtos com facilidade e confiança.
           </p>
         </div>
@@ -66,7 +66,7 @@ const AboutPage: React.FC = () => {
         <h2 className="text-3xl font-bold text-gray-900 text-center mb-12">
           Por que escolher o ClassiMarket?
         </h2>
-
+        
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {features.map((feature, index) => (
             <Card key={index} className="p-6 text-center">
@@ -89,7 +89,7 @@ const AboutPage: React.FC = () => {
         <h2 className="text-3xl font-bold text-center mb-12">
           ClassiMarket em Números
         </h2>
-
+        
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           <div className="text-center">
             <div className="text-4xl font-bold text-blue-400 mb-2">15K+</div>
@@ -117,9 +117,9 @@ const AboutPage: React.FC = () => {
         </h2>
         <div className="max-w-3xl mx-auto text-center">
           <p className="text-lg text-gray-700 leading-relaxed">
-            Fundado em 2020, o ClassiMarket nasceu da necessidade de criar uma
-            plataforma de classificados moderna, segura e fácil de usar. Desde então,
-            temos ajudado milhares de pessoas a comprar e vender produtos,
+            Fundado em 2020, o ClassiMarket nasceu da necessidade de criar uma 
+            plataforma de classificados moderna, segura e fácil de usar. Desde então, 
+            temos ajudado milhares de pessoas a comprar e vender produtos, 
             construindo uma comunidade confiável e ativa em todo o Brasil.
           </p>
         </div>

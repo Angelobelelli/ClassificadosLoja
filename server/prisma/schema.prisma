@@ -1,0 +1,64 @@
+// schema.prisma
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Category {
+  id        String    @id @default(cuid())
+  name      String
+  icon      String
+  products  Product[]
+  createdAt DateTime  @default(now())
+}
+
+model Product {
+  id          String    @id @default(cuid())
+  title       String
+  description String
+  price       Float
+  category    Category  @relation(fields: [categoryId], references: [id])
+  categoryId  String
+  images      Image[]
+  seller      Seller    @relation(fields: [sellerId], references: [id])
+  sellerId    String
+  city        String
+  state       String
+  isPremium   Boolean   @default(false)
+  status      ProductStatus @default(ACTIVE)
+  views       Int       @default(0)
+  createdAt   DateTime  @default(now())
+}
+
+model Image {
+  id        String   @id @default(cuid())
+  url       String
+  alt       String?
+  product   Product  @relation(fields: [productId], references: [id])
+  productId String
+}
+
+model Seller {
+  id        String    @id @default(cuid())
+  name      String
+  phone     String
+  whatsapp  String?
+  products  Product[]
+  createdAt DateTime  @default(now())
+}
+
+enum ProductStatus {
+  ACTIVE
+  SOLD
+  REMOVED
+}
+enum TypeUsers {
+  client
+  provider
+  admin
+}
+

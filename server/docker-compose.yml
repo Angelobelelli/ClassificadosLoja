@@ -1,0 +1,12 @@
+version: '3.3'
+
+services:
+  classification:
+    image: bitnami/postgresql
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: 1304
+      POSTGRES_DB: classification
+   
