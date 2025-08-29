@@ -1,35 +1,34 @@
-# App
+  # App
 
-Classificados style app
+Gympass style app
 
 ## RFs (Requisitos Funcionais)
 
-[] Deve ser possível cadastrar um seller;
-[] Deve ser possível realizar login para sellers;
-[] Deve ser possível obter o perfil de um seller logado;
-[] Deve ser possível cadastrar categorias(admin);
-[] Deve ser possível listar categorias com contagem de produtos;
-[] Deve ser possível cadastrar um produto (anúncio);
-[] Deve ser possível editar ou remover um produto pelo seller;
-[] Deve ser possível adicionar, remover ou atualizar imagens de um produto;
-[] Deve ser possível buscar produtos por texto, categoria, cidade, estado, faixa de preço e produtos premium;
-[] Deve ser possível ordenar produtos por preço, data de criação ou número de views;
-[] Deve ser possível visualizar o número de visualizações de um produto;
-[] Deve ser possível listar produtos premium;
+- [x] Deve ser possivel se cadastrar;
+- [x] Deve ser possivel realizar login;
+- [x] Deve ser possivel obter o perfil de um usuario logado;
+- [ ] Deve ser possivel obter o numero de check-ins realizados pelo usuario logado;
+- [ ] Deve ser possivel o usuario obter seu historico de check-ins;
+- [ ] Deve ser possivel o usuario buscar academias proximas;
+- [ ] Deve ser possivel o usuario buscar academias pelo nome;
+- [ ] Deve ser possivel o usuario realizar check-in em uma academia;
+- [ ] Deve ser possivel validar o check-in de um usuario;
+- [ ] Deve ser possivel cadastrar uma academia;
 
 ## RNs (Regras de Negócio)
 
-[] Um seller só pode editar ou remover seus próprios produtos;
-[] Produtos premium são destacados na listagem principal;
-[] Produtos removidos ou vendidos não aparecem nas buscas públicas;
-[] Cada produto deve obrigatoriamente ter uma categoria;
-[] Cada produto deve registrar o número de views a cada acesso único;
+- [x] O usuario não deve poder se cadastrar com um email ja existente;
+- [] O usuario não pode fazer 2 check-ins no mesmo dia;
+- [] O usuario não pode fazer check-ins se não estiver perto (100m) da academia;
+- [] O check-in só pode ser validado até 20 minutos após criado;
+- [] O check-in só pode ser validado por admintradores;
+- [] A academia só pode ser cadastrada por administradores
+
+
 
 ## RNFs (Requisitos não funcionais)
 
-[] A senha do seller precisa estar criptografada;
-[] Os dados da aplicação precisam estar em um banco MySQL via Prisma;
-[] Todas listas de dados precisam estar paginadas (20 itens por página);
-[] A aplicação precisa ter um sistema de login com JWT;
-[] O sistema deve ser responsivo e acessível em dispositivos móveis e desktop;
-[] O tempo de resposta das buscas deve ser inferior a 1 segundo para até 10.000 produtos;
+- [] A senha do usuario precisa estar criptografada;
+- [] Os dados da aplicacao precisam estar em um banco PostgreSQL;
+- [] Todas listas de dados precisam estar paginadas com 20 itens por pagina;
+- [] A aplicacao precisa ter um sistema de login com JWT;

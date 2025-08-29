@@ -1,4 +1,21 @@
 {
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Classificados style app",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "scripts": {
+    "build": "tsup src",
+    "start": "node dist/server.js",
+    "dev": "tsx watch src/server.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "test:ui": "vitest --ui"
+  },
   "dependencies": {
     "@prisma/client": "^6.15.0",
     "bcryptjs": "^3.0.2",

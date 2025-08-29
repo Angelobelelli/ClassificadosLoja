@@ -11,10 +11,10 @@ import Button from '../components/ui/Button';
 const CategoryPage: React.FC = () => {
   const { categoryId } = useParams<{ categoryId: string }>();
   const { searchProducts, loading } = useProducts();
-  
+
   const category = categories.find(cat => cat.id === categoryId);
   const [filters, setFilters] = useState<SearchFilters>({ category: categoryId });
-  
+
   const filteredProducts = searchProducts(filters);
 
   const handleSearch = (newFilters: SearchFilters) => {
@@ -42,14 +42,14 @@ const CategoryPage: React.FC = () => {
           <ArrowLeft className="w-4 h-4 mr-2" />
           Voltar às categorias
         </Link>
-        
+
         <h1 className="text-3xl font-bold text-gray-900 mb-2">{category.name}</h1>
         <p className="text-gray-600">
           {category.count} produtos disponíveis nesta categoria
         </p>
       </div>
 
-      {/* Search Bar */}
+      {/* Search Bar */}1
       <SearchBar onSearch={handleSearch} initialFilters={filters} />
 
       {/* Results */}
@@ -58,7 +58,7 @@ const CategoryPage: React.FC = () => {
           <h2 className="text-xl font-semibold text-gray-900">
             {filteredProducts.length} produto{filteredProducts.length !== 1 ? 's' : ''} em {category.name}
           </h2>
-          
+
           <select className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
             <option value="newest">Mais recentes</option>
             <option value="price-low">Menor preço</option>
